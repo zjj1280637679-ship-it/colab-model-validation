@@ -1,0 +1,9 @@
+{
+  "program_source_sha256": "9f6bb9f7189e124f3b908997faa7d9362686c75f2a3e9d117232490934cb7dc8",
+  "files": {
+    "minimax_h3_author_bf16.ipynb": "895bbe36e61847f569d2a13e7a4556252691d7544cdd42fa7f3a5fcc10b1e1d6",
+    "cell_01.py": "418a68eca34b55af38fcfbaf0f08511101b1758d54829a6f555f3bd5d70088e3",
+    "cell_02.py": "db6fdb6044ccfa48a66774858334e87343563fc3bd7ed1debaeb886d12da24fb",
+    "minimax_h3_t2v.json": "7c2f725c9ea327b9fa21f82b2d37f311436e5a8792dc64afd00ac84fd6e8adcf"
+  }
+}

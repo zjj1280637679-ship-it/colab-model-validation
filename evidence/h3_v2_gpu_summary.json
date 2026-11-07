@@ -1,0 +1,183 @@
+{
+  "mode": "GPU_FULL_MODEL",
+  "program_source_sha256": "9f6bb9f7189e124f3b908997faa7d9362686c75f2a3e9d117232490934cb7dc8",
+  "status": "NATIVE_INFERENCE_AND_MEDIA_STRUCTURE_PASSED_QUALITY_REVIEW_REQUIRED",
+  "model_loaded": true,
+  "inference_executed": true,
+  "total_budget_minutes": 50,
+  "gpu_peak_memory": "NOT_MEASURED",
+  "compute_autocast_dtype": "NOT_MEASURED",
+  "source": "shinshin86/comfy-agent@a386b5cfaca565cc24cc592a0b480cb6c06971c9",
+  "host_region_status": "unknown",
+  "hardware": {
+    "cuda": true,
+    "name": "NVIDIA A100-SXM4-80GB",
+    "vram": 85094825984
+  },
+  "comfyui_revision": "e01fb4c56b7a88149d469b99cbbfe3223d715054",
+  "planned_model_assets": [
+    {
+      "path": "diffusion_models/minimax_h3_fl2va_bf16.safetensors",
+      "bytes": 66280487368,
+      "sha256": "907d4add438438ec1544f5240c3b38532ed934fe6be75677a6bbda2a6fdd6182"
+    },
+    {
+      "path": "text_encoders/qwen3vl_32b_minimax_h3_bf16.safetensors",
+      "bytes": 51506295256,
+      "sha256": "600d567f6a9629c8574e8e7041b199bdd9c59a986afa7906910a81919610607d"
+    },
+    {
+      "path": "vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "sha256": "7c1f131492e7eddacaac9069a61b81bdd39de5cc96561e677c5eab1cdce5e522"
+    },
+    {
+      "path": "vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "sha256": "8e505d95dd1561d47abd43d4238fd40d9bb1ae9e147ed0a4cba778d76ae4db48"
+    }
+  ],
+  "model_revision": "4cc1d817b6184899b41293954329f576cb5ae86b",
+  "model_downloads": "VERIFIED_SIZE_AND_SHA256",
+  "nodes_py_sha256": "e203467e1d6aba826d91b752319b2f8e8980f89db0c2a02e58711987dd223d8a",
+  "elapsed_total_seconds": 1563.625,
+  "runtime_versions": {
+    "torch": "2.14.1+cu130",
+    "torchvision": "0.29.1+cu130",
+    "torchaudio": "2.11.0+cu130",
+    "numpy": "2.4.6",
+    "Pillow": "11.3.0",
+    "transformers": "5.22.1",
+    "safetensors": "0.8.0",
+    "av": "19.0.2",
+    "comfy-kitchen": "0.2.31",
+    "comfy-aimdo": "0.4.13",
+    "comfyui-frontend-package": "1.48.7",
+    "jedi": "0.19.2"
+  },
+  "workflow_validation": {
+    "node_count": 14,
+    "connection_count": 17,
+    "schema_check": "PASSED",
+    "skipped_model_existence_checks": [],
+    "note": "Real /object_info inspection, not ComfyUI execution validation or inference."
+  },
+  "workflow_sha256": "7051f43d43c6f94f7dbac5a751f9fac711686e325e941cb65d9d36bbc6f740d5",
+  "workflow_parameters": {
+    "width": 864,
+    "height": 480,
+    "length": 124,
+    "steps": 20,
+    "seed": 42
+  },
+  "precision": [
+    {
+      "component": "audio_vae",
+      "parameter_numel_by_dtype": {
+        "torch.float32": 151282160
+      },
+      "parameter_numel_by_device": {
+        "cpu": 151282160
+      },
+      "parameter_classes": {
+        "torch.nn.parameter.Parameter": 660
+      },
+      "quantized_parameter_count": 0,
+      "quantized_module_classes": [],
+      "loader_options": {
+        "vae_dtype": "torch.float32"
+      },
+      "scope": "parameter storage at native-loader return, not autocast/compute dtype or a complete checkpoint audit"
+    },
+    {
+      "component": "video_vae",
+      "parameter_numel_by_dtype": {
+        "torch.float16": 2603868984
+      },
+      "parameter_numel_by_device": {
+        "cpu": 2603868984
+      },
+      "parameter_classes": {
+        "torch.nn.parameter.Parameter": 559
+      },
+      "quantized_parameter_count": 0,
+      "quantized_module_classes": [],
+      "loader_options": {
+        "vae_dtype": "torch.float16"
+      },
+      "scope": "parameter storage at native-loader return, not autocast/compute dtype or a complete checkpoint audit"
+    },
+    {
+      "component": "text_encoder",
+      "parameter_numel_by_dtype": {
+        "torch.float32": 1,
+        "torch.bfloat16": 25753095920
+      },
+      "parameter_numel_by_device": {
+        "cpu": 25753095921
+      },
+      "parameter_classes": {
+        "torch.nn.parameter.Parameter": 903
+      },
+      "quantized_parameter_count": 0,
+      "quantized_module_classes": [],
+      "loader_options": {},
+      "scope": "parameter storage at native-loader return, not autocast/compute dtype or a complete checkpoint audit"
+    },
+    {
+      "component": "transformer",
+      "parameter_numel_by_dtype": {
+        "torch.float32": 17222144,
+        "torch.bfloat16": 33105770752
+      },
+      "parameter_numel_by_device": {
+        "cpu": 33122992896
+      },
+      "parameter_classes": {
+        "torch.nn.parameter.Parameter": 534
+      },
+      "quantized_parameter_count": 0,
+      "quantized_module_classes": [],
+      "loader_options": {},
+      "scope": "parameter storage at native-loader return, not autocast/compute dtype or a complete checkpoint audit"
+    }
+  ],
+  "media": {
+    "width": 864,
+    "height": 480,
+    "fps": 24.0,
+    "sample_rate": 32000,
+    "channels": 2,
+    "frames": 124,
+    "decoded_audio_rms": 0.07636490970088336,
+    "decoded_audio_peak": 0.6171295642852783,
+    "sha256": "0ac130e782de614aba6dd9f7d7fba56b56148e49a3e669984df165c1af12a68c",
+    "hash_scope": "runtime bytes only; no independent download verification"
+  },
+  "execution_status": {
+    "status_str": "success",
+    "completed": true
+  },
+  "timing": {
+    "total_seconds": 1563.625,
+    "graph_reported_seconds": 333.33,
+    "polling_seconds": 334.3092641359999
+  },
+  "review_limits": {
+    "original_mp4_exported": false,
+    "original_zip_exported": false,
+    "independent_media_hash_verified": false,
+    "independent_listening_passed": false,
+    "visual_review": "operator spot-check passed at 0:00, 0:02 and 0:05; clear blue-hour lake, distant mountains, moving lanterns and changing water reflections; not frame-by-frame QA",
+    "true_peak_memory_measured": false,
+    "compute_dtype_measured": false
+  },
+  "operator_observations": {
+    "ram_gb_display_max_seen": 114.8,
+    "vram_gb_display_max_seen": 77.9,
+    "memory_scope": "maximum GUI observation only, not instrumented peak",
+    "compute_unit_balance_difference": 3.44,
+    "billing_scope": "balance difference, not final settlement",
+    "runtime_released": true
+  }
+}

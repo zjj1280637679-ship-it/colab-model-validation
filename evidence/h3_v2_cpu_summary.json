@@ -1,0 +1,87 @@
+{
+  "mode": "CPU_NO_WEIGHTS",
+  "program_source_sha256": "9f6bb9f7189e124f3b908997faa7d9362686c75f2a3e9d117232490934cb7dc8",
+  "status": "CPU_NATIVE_STARTUP_AND_GRAPH_SCHEMA_PASSED",
+  "model_loaded": false,
+  "inference_executed": false,
+  "total_budget_minutes": 12,
+  "gpu_peak_memory": "NOT_MEASURED",
+  "compute_autocast_dtype": "NOT_MEASURED",
+  "source": "shinshin86/comfy-agent@a386b5cfaca565cc24cc592a0b480cb6c06971c9",
+  "host_region_status": "NOT_RECORDED",
+  "hardware": {
+    "cuda": false,
+    "name": null,
+    "vram": 0
+  },
+  "comfyui_revision": "e01fb4c56b7a88149d469b99cbbfe3223d715054",
+  "planned_model_assets": [
+    {
+      "path": "diffusion_models/minimax_h3_fl2va_bf16.safetensors",
+      "bytes": 66280487368,
+      "sha256": "907d4add438438ec1544f5240c3b38532ed934fe6be75677a6bbda2a6fdd6182"
+    },
+    {
+      "path": "text_encoders/qwen3vl_32b_minimax_h3_bf16.safetensors",
+      "bytes": 51506295256,
+      "sha256": "600d567f6a9629c8574e8e7041b199bdd9c59a986afa7906910a81919610607d"
+    },
+    {
+      "path": "vae/minimax_h3_video_vae_fp16.safetensors",
+      "bytes": 5207808496,
+      "sha256": "7c1f131492e7eddacaac9069a61b81bdd39de5cc96561e677c5eab1cdce5e522"
+    },
+    {
+      "path": "vae/minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "sha256": "8e505d95dd1561d47abd43d4238fd40d9bb1ae9e147ed0a4cba778d76ae4db48"
+    }
+  ],
+  "model_revision": "4cc1d817b6184899b41293954329f576cb5ae86b",
+  "model_downloads": "SKIPPED_NO_WEIGHTS",
+  "nodes_py_sha256": "e203467e1d6aba826d91b752319b2f8e8980f89db0c2a02e58711987dd223d8a",
+  "elapsed_total_seconds": 100.249,
+  "runtime_versions": {
+    "torch": "2.14.1+cpu",
+    "torchvision": "0.29.1+cpu",
+    "torchaudio": "2.11.0+cpu",
+    "numpy": "2.4.6",
+    "Pillow": "11.3.0",
+    "transformers": "5.22.1",
+    "safetensors": "0.8.0",
+    "av": "19.0.2",
+    "comfy-kitchen": "0.2.31",
+    "comfy-aimdo": "0.4.13",
+    "comfyui-frontend-package": "1.48.7",
+    "jedi": "0.19.2"
+  },
+  "workflow_validation": {
+    "node_count": 14,
+    "connection_count": 17,
+    "schema_check": "PASSED",
+    "skipped_model_existence_checks": [
+      "6.unet_name: file existence SKIPPED_NO_WEIGHTS",
+      "11.vae_name: file existence SKIPPED_NO_WEIGHTS",
+      "13.clip_name: file existence SKIPPED_NO_WEIGHTS",
+      "24.vae_name: file existence SKIPPED_NO_WEIGHTS"
+    ],
+    "note": "Real /object_info inspection, not ComfyUI execution validation or inference."
+  },
+  "workflow_sha256": "7051f43d43c6f94f7dbac5a751f9fac711686e325e941cb65d9d36bbc6f740d5",
+  "workflow_parameters": {
+    "width": 864,
+    "height": 480,
+    "length": 124,
+    "steps": 20,
+    "seed": 42
+  },
+  "skipped": [
+    "all H3 weight downloads",
+    "model file existence checks",
+    "native /prompt execution validation",
+    "all model loading",
+    "parameter dtype audit",
+    "sampling",
+    "H3 media generation/verification"
+  ]
+}

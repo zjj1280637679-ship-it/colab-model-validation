@@ -1,0 +1,37 @@
+{
+  "program_source_sha256": "9f6bb9f7189e124f3b908997faa7d9362686c75f2a3e9d117232490934cb7dc8",
+  "cpu_gpu_saved_cell_01_identical": true,
+  "cpu_gpu_saved_cell_02_identical": true,
+  "saved_cell_01_sha256": "c608a59db4d505c660e5b6f7f87ed46cdb96728f3f4d45c02e14cfa0c7bf0dcd",
+  "frozen_cell_01_sha256": "418a68eca34b55af38fcfbaf0f08511101b1758d54829a6f555f3bd5d70088e3",
+  "cell_01_difference": "Colab trailing whitespace normalization only; normalized lines identical",
+  "cell_02_sha256": "db6fdb6044ccfa48a66774858334e87343563fc3bd7ed1debaeb886d12da24fb",
+  "public_defaults": {
+    "MODE": "CPU_NO_WEIGHTS",
+    "ALLOW_THIS_RUN": false,
+    "GPU_BUDGET_MINUTES": 50,
+    "I_READ_H3_LICENSE": false,
+    "KNOWN_APPLICABLE_BLOCK_STATUS": "not_assessed",
+    "HOST_REGION_STATUS": "unknown",
+    "I_UNDERSTAND_UNRESOLVED_LICENSE_RISK": false
+  },
+  "observed_cpu_settings": {
+    "MODE": "CPU_NO_WEIGHTS",
+    "ALLOW_THIS_RUN": true,
+    "GPU_BUDGET_MINUTES": 50,
+    "I_READ_H3_LICENSE": false,
+    "KNOWN_APPLICABLE_BLOCK_STATUS": "not_assessed",
+    "HOST_REGION_STATUS": "unknown",
+    "I_UNDERSTAND_UNRESOLVED_LICENSE_RISK": false
+  },
+  "observed_gpu_settings": {
+    "MODE": "GPU_FULL_MODEL",
+    "ALLOW_THIS_RUN": true,
+    "GPU_BUDGET_MINUTES": 50,
+    "I_READ_H3_LICENSE": true,
+    "KNOWN_APPLICABLE_BLOCK_STATUS": "none_identified",
+    "HOST_REGION_STATUS": "unknown",
+    "I_UNDERSTAND_UNRESOLVED_LICENSE_RISK": true
+  },
+  "warning": "Observed settings describe a past run, not permission or legal eligibility for another user/deployment."
+}

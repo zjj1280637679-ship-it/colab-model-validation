@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "two_scoped_bf16_baselines_verified_h3_blocked",
+  "status": "qwen_scoped_baselines_and_h3_native_inference_media_structure_completed",
   "precision_policy": "BF16-first; no automatic quantization or precision downgrade",
   "models": [
     {
@@ -42,20 +42,32 @@
     },
     {
       "model_id": "MiniMaxAI/MiniMax-H3",
-      "revision": null,
-      "status": "not_run_license_eligibility_unresolved",
-      "evidence_files": []
+      "revision": "4cc1d817b6184899b41293954329f576cb5ae86b",
+      "status": "native_inference_and_media_structure_completed_quality_review_required",
+      "evidence_files": [
+        "h3_v2_gpu_summary.json",
+        "h3_v2_cpu_summary.json",
+        "h3_v2_source_and_settings.json"
+      ],
+      "weight_source": "Comfy-Org/MiniMax-H3",
+      "implementation": "shinshin86/comfy-agent minimal high-precision adaptation v2",
+      "coverage": "20/20 native graph; 864x480, 124 frames, 24fps, 32000Hz stereo; mixed high-precision storage at CPU loader return only",
+      "license_status": "host region unknown; no legal eligibility conclusion",
+      "media_artifact_status": "MP4/ZIP not recovered; runtime hash not independently verified; listening not independently accepted",
+      "visual_review": "three-time-point operator spot-check passed; not frame-by-frame QA"
     }
   ],
   "independent_review": {
     "status": "scoped_baselines_passed",
     "reports": [
       "Operator-relayed independent checkpoint/meta reconciliation and two image baseline reviews; image byte hash unverified."
-    ]
+    ],
+    "scope": "Qwen independent reviews; H3 execution/media-structure and three-time-point visual spot-check have separate limited evidence, independent listening/hash not verified"
   },
   "runtime_shutdown": {
     "status": "operator_verified_zero_sessions",
     "reported_compute_unit_delta": 1.71,
-    "caveat": "UI balance difference only; settlement may be delayed, not a price guarantee"
+    "caveat": "UI balance difference only; settlement may be delayed, not a price guarantee",
+    "scope": "Qwen run only; H3 shutdown and balance observations are in h3_v2_gpu_summary.json"
   }
 }

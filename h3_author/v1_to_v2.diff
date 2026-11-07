@@ -1,0 +1,101 @@
+--- v1/config.py
++++ v2/config.py
+@@ -1,6 +1,9 @@
+ # @title Author H3 kit: explicit, single-run settings (defaults are OFF)
+ MODE = "CPU_NO_WEIGHTS" # @param ["CPU_NO_WEIGHTS", "GPU_FULL_MODEL"]
+ ALLOW_THIS_RUN = False # @param {type:"boolean"}
++GPU_BUDGET_MINUTES = 50 # @param {type:"integer"}
++# Hard maximum 50 minutes total from setup start. CPU stays 12 minutes.
++# 50 min at 8.88 CU/h is about 7.40 CU, not a price guarantee.
+ I_READ_H3_LICENSE = False # @param {type:"boolean"}
+ KNOWN_APPLICABLE_BLOCK_STATUS = "not_assessed" # @param ["not_assessed", "none_identified", "block_identified"]
+ HOST_REGION_STATUS = "unknown" # @param ["unknown", "reviewed"]
+--- v1/preamble.py
++++ v2/preamble.py
+@@ -20,17 +20,24 @@
+ ):
+     release_runtime("license review gate closed")
+     raise RuntimeError("Read the license and review applicable blocks before GPU/model download")
++if type(GPU_BUDGET_MINUTES) is not int or not 1 <= GPU_BUDGET_MINUTES <= 50:
++    release_runtime("invalid total budget")
++    raise ValueError("GPU_BUDGET_MINUTES must be an integer from 1 through 50")
+ if globals().get("_H3_AUTHOR_STARTED"):
+     raise RuntimeError("This single-run cell already started. Do not reset or extend its deadline.")
+ _H3_AUTHOR_STARTED = True
+ RUN_ROOT = pathlib.Path("/content") / ("h3_author_" + uuid.uuid4().hex[:12])
+ RUN_ROOT.mkdir()
+-DEADLINE = time.monotonic() + (12 * 60 if MODE == "CPU_NO_WEIGHTS" else 25 * 60)
++TOTAL_BUDGET_MINUTES = 12 if MODE == "CPU_NO_WEIGHTS" else GPU_BUDGET_MINUTES
++RUN_STARTED_MONOTONIC = time.monotonic()
++DEADLINE = RUN_STARTED_MONOTONIC + TOTAL_BUDGET_MINUTES * 60
+ _RELEASE_TIMER = threading.Timer(max(0, DEADLINE - time.monotonic()), release_runtime, args=("single lifecycle deadline",))
+ _RELEASE_TIMER.daemon = True
+ _RELEASE_TIMER.start()
+ RESULT = {"mode": MODE, "program_source_sha256": PROGRAM_SOURCE_SHA256,
+           "status": "SETUP_STARTED", "model_loaded": False, "inference_executed": False,
++          "total_budget_minutes": TOTAL_BUDGET_MINUTES,
++          "gpu_peak_memory": "NOT_MEASURED", "compute_autocast_dtype": "NOT_MEASURED",
+           "source": "shinshin86/comfy-agent@a386b5cfaca565cc24cc592a0b480cb6c06971c9",
+           "known_applicable_block_status": KNOWN_APPLICABLE_BLOCK_STATUS if MODE == "GPU_FULL_MODEL" else "NOT_APPLICABLE_NO_WEIGHTS",
+           "host_region_status": HOST_REGION_STATUS if MODE == "GPU_FULL_MODEL" else "NOT_RECORDED"}
+@@ -43,6 +50,8 @@
+     return value
+ 
+ def save_result():
++    RESULT["elapsed_total_seconds"] = round(time.monotonic() - RUN_STARTED_MONOTONIC, 3)
++    RESULT["remaining_budget_seconds"] = round(max(0, DEADLINE - time.monotonic()), 3)
+     RESULT["runtime_versions"] = {}
+     for name in ("torch", "torchvision", "torchaudio", "numpy", "Pillow", "transformers", "safetensors", "av", "comfy-kitchen", "comfy-aimdo", "comfyui-frontend-package", "jedi"):
+         try: RESULT["runtime_versions"][name] = importlib.metadata.version(name)
+--- v1/01_setup.py
++++ v2/01_setup.py
+@@ -37,12 +37,21 @@
+ 
+ 
+ def ensure_download(url, destination, expected_size, expected_sha256):
++    asset_name = os.path.basename(destination)
++    stage = {'asset': asset_name, 'url': url, 'expected_bytes': expected_size,
++             'expected_sha256': expected_sha256, 'download_seconds': 0.0, 'hash_seconds': 0.0}
++    RESULT.setdefault('asset_stages', []).append(stage)
+     os.makedirs(os.path.dirname(destination), exist_ok=True)
+     if os.path.isfile(destination):
+         current_size = os.path.getsize(destination)
+         if current_size == expected_size:
++            print('HASH_START', asset_name, 'existing_file', flush=True)
++            hash_started = time.monotonic()
+             actual = sha256_file(destination)
++            stage['hash_seconds'] += round(time.monotonic() - hash_started, 3)
++            print('HASH_END', asset_name, 'seconds', stage['hash_seconds'], 'sha256', actual, flush=True)
+             if actual == expected_sha256:
++                stage['status'] = 'EXISTING_FILE_VERIFIED'
+                 print(f"Using verified file: {destination}")
+                 return
+             print(f"Removing checksum-mismatched file: {destination}")
+@@ -53,13 +62,26 @@
+         else:
+             print(f"Resuming partial download: {destination}")
+ 
+-    run("wget", "-c", "-O", destination, url)
++    print('DOWNLOAD_START', asset_name, 'expected_bytes', expected_size, 'url', url, flush=True)
++    download_started = time.monotonic()
++    try:
++        run("wget", "-nv", "-c", "-O", destination, url)
++    finally:
++        stage['download_seconds'] = round(time.monotonic() - download_started, 3)
++        print('DOWNLOAD_END', asset_name, 'seconds', stage['download_seconds'], flush=True)
+     actual_size = os.path.getsize(destination)
+     if actual_size != expected_size:
+         raise RuntimeError(
+             f"Size mismatch for {destination}: expected {expected_size}, got {actual_size}"
+         )
++    print('HASH_START', asset_name, 'bytes', actual_size, flush=True)
++    hash_started = time.monotonic()
+     actual_sha256 = sha256_file(destination)
++    stage['hash_seconds'] += round(time.monotonic() - hash_started, 3)
++    print('HASH_END', asset_name, 'seconds', stage['hash_seconds'], 'sha256', actual_sha256, flush=True)
++    stage['actual_bytes'] = actual_size
++    stage['actual_sha256'] = actual_sha256
++    stage['status'] = 'VERIFIED' if actual_sha256 == expected_sha256 else 'SHA256_MISMATCH' 
+     if actual_sha256 != expected_sha256:
+         raise RuntimeError(
+             f"SHA-256 mismatch for {destination}: expected {expected_sha256}, got {actual_sha256}"

@@ -7,3 +7,7 @@ This repository does not redistribute model weights. Its code does not replace o
 - MiniMax-H3: https://huggingface.co/MiniMaxAI/MiniMax-H3 and https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/LICENSE . Reported territory exclusions include United States, European Union, United Kingdom and South Korea. Do not infer eligibility from language, account locale or notebook ownership. Closed Context-IR / Regenerate2K components are not supplied.
 
 PyTorch, Transformers, Diffusers, Accelerate, Hugging Face Hub and other dependencies retain their respective licenses. No license to upstream models is granted here. A project-code license has not yet been selected; this is not a claim of an unrestricted open-source release.
+
+## Included H3 author adaptation
+
+The h3_author/ subtree derives from shinshin86/comfy-agent@a386b5cfaca565cc24cc592a0b480cb6c06971c9 (Colab scripts and workflow; this project packages the notebook). MIT ©2026 Yuki Shindo; full license is included in h3_author/LICENSE and h3_author/upstream/LICENSE. This does not license MiniMax-H3 weights/outputs. See h3_author/README.md for exact sources and changes. Model host region remained unknown; execution is not a legal eligibility finding.
