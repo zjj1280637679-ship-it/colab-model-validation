@@ -1,0 +1,5 @@
+{
+  "status": "observed_direct_versions_pinned",
+  "transitive_lock": "not_available",
+  "torch": "Colab-provided 2.14.1+cu130; not replaced"
+}

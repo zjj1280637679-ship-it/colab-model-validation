@@ -1,0 +1,36 @@
+{
+  "model": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+  "revision": "739e3c5b89849f6c238ce1e5b70008612ae42cdd",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "dtype_counts": {
+    "torch.bfloat16": 27356728560
+  },
+  "device_counts": {
+    "cuda:0": 27356728560
+  },
+  "quantized": false,
+  "load_seconds": 191.17,
+  "tests": [
+    {
+      "prompt": "请用一句中文解释什么是 Google Colab。",
+      "answer": "Google Colab 是一个免费的云端 Jupyter 笔记本环境，允许用户直接在浏览器中编写和运行 Python 代码，并免费使用 Google 的 GPU 和 TPU 等高性能计算资源。",
+      "new_tokens": 43,
+      "seconds": 7.66
+    },
+    {
+      "prompt": "计算 17 × 23，只输出整数。",
+      "answer": "391",
+      "new_tokens": 4,
+      "seconds": 0.55
+    },
+    {
+      "prompt": "Write a Python function named square that returns x multiplied by itself.",
+      "answer": "```python\ndef square(x):\n    return x * x\n```",
+      "new_tokens": 16,
+      "seconds": 1.99
+    }
+  ],
+  "peak_allocated_gib": 51.142,
+  "peak_reserved_gib": 51.156,
+  "status": "INFERENCE_COMPLETED_PENDING_INDEPENDENT_REVIEW"
+}

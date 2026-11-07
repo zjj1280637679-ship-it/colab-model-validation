@@ -1,0 +1,2 @@
+-r requirements.txt
+diffusers @ git+https://github.com/huggingface/diffusers.git@84532a058702c74ae5d1dd6ceb05683fc5d5e768

@@ -1,0 +1,130 @@
+{
+  "repo": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+  "revision": "739e3c5b89849f6c238ce1e5b70008612ae42cdd",
+  "checkpoint_dtype_numel": {
+    "BF16": 27781427952
+  },
+  "checkpoint_total": 27781427952,
+  "meta_state_dict_total": 27356728560,
+  "meta_parameters_total": 27356728560,
+  "meta_parameters_without_deduplication": 27356728560,
+  "checkpoint_only_total": 424699392,
+  "checkpoint_only": {
+    "mtp.layers.0.mlp.gate_proj.weight": {
+      "shape": [
+        17408,
+        5120
+      ],
+      "numel": 89128960,
+      "dtype": "BF16"
+    },
+    "mtp.pre_fc_norm_embedding.weight": {
+      "shape": [
+        5120
+      ],
+      "numel": 5120,
+      "dtype": "BF16"
+    },
+    "mtp.pre_fc_norm_hidden.weight": {
+      "shape": [
+        5120
+      ],
+      "numel": 5120,
+      "dtype": "BF16"
+    },
+    "mtp.layers.0.post_attention_layernorm.weight": {
+      "shape": [
+        5120
+      ],
+      "numel": 5120,
+      "dtype": "BF16"
+    },
+    "mtp.layers.0.self_attn.v_proj.weight": {
+      "shape": [
+        1024,
+        5120
+      ],
+      "numel": 5242880,
+      "dtype": "BF16"
+    },
+    "mtp.fc.weight": {
+      "shape": [
+        5120,
+        10240
+      ],
+      "numel": 52428800,
+      "dtype": "BF16"
+    },
+    "mtp.layers.0.mlp.up_proj.weight": {
+      "shape": [
+        17408,
+        5120
+      ],
+      "numel": 89128960,
+      "dtype": "BF16"
+    },
+    "mtp.layers.0.input_layernorm.weight": {
+      "shape": [
+        5120
+      ],
+      "numel": 5120,
+      "dtype": "BF16"
+    },
+    "mtp.layers.0.self_attn.k_proj.weight": {
+      "shape": [
+        1024,
+        5120
+      ],
+      "numel": 5242880,
+      "dtype": "BF16"
+    },
+    "mtp.layers.0.self_attn.k_norm.weight": {
+      "shape": [
+        256
+      ],
+      "numel": 256,
+      "dtype": "BF16"
+    },
+    "mtp.layers.0.mlp.down_proj.weight": {
+      "shape": [
+        5120,
+        17408
+      ],
+      "numel": 89128960,
+      "dtype": "BF16"
+    },
+    "mtp.layers.0.self_attn.o_proj.weight": {
+      "shape": [
+        5120,
+        6144
+      ],
+      "numel": 31457280,
+      "dtype": "BF16"
+    },
+    "mtp.layers.0.self_attn.q_norm.weight": {
+      "shape": [
+        256
+      ],
+      "numel": 256,
+      "dtype": "BF16"
+    },
+    "mtp.layers.0.self_attn.q_proj.weight": {
+      "shape": [
+        12288,
+        5120
+      ],
+      "numel": 62914560,
+      "dtype": "BF16"
+    },
+    "mtp.norm.weight": {
+      "shape": [
+        5120
+      ],
+      "numel": 5120,
+      "dtype": "BF16"
+    }
+  },
+  "model_only": {},
+  "shape_mismatch": {},
+  "note": "Headers and meta tensors only. No real tensors loaded or inference repeated."
+}

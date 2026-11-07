@@ -1,9 +1,16 @@
 __pycache__/
 *.py[cod]
+.ipynb_checkpoints/
 .env*
+!.env.example
 .cache/
+outputs/
+raw_logs/
 *.safetensors
 *.bin
 *.pt
 *.pth
 *.gguf
+*.ckpt
+*.pem
+*token*

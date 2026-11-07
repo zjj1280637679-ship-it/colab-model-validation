@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "two_scoped_bf16_baselines_verified_h3_blocked",
+  "precision_policy": "BF16-first; no automatic quantization or precision downgrade",
+  "models": [
+    {
+      "model_id": "huihui-ai/Huihui-Qwen3.8-27B-abliterated",
+      "revision": "739e3c5b89849f6c238ce1e5b70008612ae42cdd",
+      "status": "main_generation_path_bf16_completed",
+      "coverage": "Main generation path BF16; MTP auxiliary branch not loaded/enabled; visual inputs and long context untested",
+      "evidence_files": [
+        "qwen3_8_bf16.json",
+        "qwen_checkpoint_audit.json",
+        "qwen_mtp_header_review.json"
+      ],
+      "checkpoint_audit": {
+        "status": "headers_and_meta_keys_reconciled",
+        "mtp_parameters_not_loaded": 424699392,
+        "mtp_tensors_not_loaded": 15,
+        "other_missing_keys": 0,
+        "shape_mismatches": 0
+      }
+    },
+    {
+      "model_id": "Qwen/Qwen-Image-2.1",
+      "revision": "d26bb61231c349cf6b7896fa83353113880e1ba3",
+      "status": "text_to_image_bf16_completed",
+      "evidence_files": [
+        "qwen_image_2_1_bf16.json"
+      ],
+      "coverage": "one 2048x2048 RGBA generation, 40 steps; editing and transparent generation untested",
+      "image_artifact": {
+        "status": "not_exported",
+        "hash_status": "reported_by_runtime_not_independently_verified",
+        "visual_review": "operator viewed notebook rendering; red teapot, green plant, wooden table and labeled card observed"
+      },
+      "source_precision": {
+        "vae": "FP32 converted to BF16 at load",
+        "transformer": "BF16",
+        "text_encoder": "BF16"
+      }
+    },
+    {
+      "model_id": "MiniMaxAI/MiniMax-H3",
+      "revision": null,
+      "status": "not_run_license_eligibility_unresolved",
+      "evidence_files": []
+    }
+  ],
+  "independent_review": {
+    "status": "scoped_baselines_passed",
+    "reports": [
+      "Operator-relayed independent checkpoint/meta reconciliation and two image baseline reviews; image byte hash unverified."
+    ]
+  },
+  "runtime_shutdown": {
+    "status": "operator_verified_zero_sessions",
+    "reported_compute_unit_delta": 1.71,
+    "caveat": "UI balance difference only; settlement may be delayed, not a price guarantee"
+  }
+}

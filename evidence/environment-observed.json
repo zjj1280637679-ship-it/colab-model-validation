@@ -1,0 +1,18 @@
+{
+  "status": "environment_observed_in_scoped_baseline_runs",
+  "source": "Colab operator report",
+  "python": "3.13.16",
+  "gpu": "A100-SXM4-80GB",
+  "packages": {
+    "torch": "2.14.1+cu130",
+    "transformers": "5.22.1",
+    "accelerate": "1.15.0",
+    "huggingface_hub": "1.33.0",
+    "safetensors": "0.8.0"
+  },
+  "image_dependency_planned": {
+    "repository": "https://github.com/huggingface/diffusers",
+    "commit": "84532a058702c74ae5d1dd6ceb05683fc5d5e768",
+    "status": "runtime_verified"
+  }
+}

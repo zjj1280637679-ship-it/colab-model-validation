@@ -1,0 +1,56 @@
+{
+  "model": "Qwen/Qwen-Image-2.1",
+  "revision": "d26bb61231c349cf6b7896fa83353113880e1ba3",
+  "diffusers_version": "0.42.0.dev0",
+  "diffusers_commit": "84532a058702c74ae5d1dd6ceb05683fc5d5e768",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "components": {
+    "vae": {
+      "parameters_by_dtype": {
+        "torch.bfloat16": 337740404
+      },
+      "parameters_by_device": {
+        "cuda:0": 337740404
+      },
+      "quantized": false
+    },
+    "text_encoder": {
+      "parameters_by_dtype": {
+        "torch.bfloat16": 8767123696
+      },
+      "parameters_by_device": {
+        "cuda:0": 8767123696
+      },
+      "quantized": false
+    },
+    "transformer": {
+      "parameters_by_dtype": {
+        "torch.bfloat16": 7115124736
+      },
+      "parameters_by_device": {
+        "cuda:0": 7115124736
+      },
+      "quantized": false
+    }
+  },
+  "load_seconds": 106.94,
+  "tests": [
+    {
+      "task": "text_to_image",
+      "prompt": "A photorealistic red ceramic teapot on a wooden table beside a small green plant, soft morning window light, crisp detail, a white card clearly labeled \"A100 BF16 TEST\".",
+      "width": 2048,
+      "height": 2048,
+      "mode": "RGBA",
+      "requested_steps": 40,
+      "actual_steps": 40,
+      "seed": 42,
+      "seconds": 83.44,
+      "pixel_std": 76.78382887070065,
+      "file": "qwen_image_2_1_bf16_2048.png",
+      "sha256": "0090e07be1125d5109637ac093042797a815a1745ae55e32c6363ac4ebd70066"
+    }
+  ],
+  "peak_allocated_gib": 56.49,
+  "peak_reserved_gib": 60.0,
+  "status": "INFERENCE_COMPLETED_PENDING_VISUAL_AND_INDEPENDENT_REVIEW"
+}
