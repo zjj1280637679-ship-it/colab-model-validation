@@ -12,3 +12,7 @@ The original image and ZIP were not successfully exported. The PNG hash is repor
 The executed Qwen script initially retained loop variable `p`, leaving 2.376 GiB allocated. The packaged script deletes it. The operator subsequently observed 0.008 GiB before the image run. The exporter excludes its own SHA manifest to avoid self-reference on repeated exports. Notebook installation, standalone timer, cleanup and exporter packaging changes have static checks but have not been rerun end-to-end as the final notebooks.
 
 Observed direct versions are recorded; a complete transitive lock was not exported. Two independent image baseline reviews passed according to reviewer reports relayed by the operator. Source VAE weights are FP32 and were loaded as BF16; transformer and text encoder source weights are BF16. This is not a claim that every upstream file is BF16. No inference ran in repository CI or local packaging tests.
+
+Post-review packaging hardening adds a single lifecycle deadline, unique report directories, allowlisted ZIP snapshots, installed-source provenance, pinned metadata queries and conservative RAM/disk checks. These are CPU/unit-tested changes, not another GPU execution.
+
+Historical inference JSON is preserved unchanged: its `diffusers_commit` field came from the requested install pin. Future image runs now verify installed direct_url metadata before first import and report observed source/commit separately from expected_commit. This stronger check was not retroactively run in the original GPU session.

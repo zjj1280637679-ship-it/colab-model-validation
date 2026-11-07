@@ -1,19 +1,11 @@
 # Main generation path BF16; MTP auxiliary branch is not loaded or enabled.
 # Transformers omits the optional MTP branch; audit_checkpoint.py records this limitation.
-# Independent kill switch: release this paid runtime after 25 minutes if unattended.
-import os, threading, time, json, gc, collections, importlib.metadata
+import os, time, json, gc, collections, importlib.metadata
 os.environ["HF_HUB_DISABLE_IMPLICIT_TOKEN"]="1"
-from google.colab import runtime
-if "gpu_shutdown_timer" in globals():
-    gpu_shutdown_timer.cancel()
-gpu_shutdown_timer=threading.Timer(25*60, runtime.unassign)
-gpu_shutdown_timer.daemon=True
-gpu_shutdown_timer.start()
-print("AUTO_SHUTDOWN: 25 minutes maximum from this cell start.")
 import transformers
 from transformers import AutoConfig, AutoTokenizer, AutoModelForImageTextToText
-MODEL_ID="huihui-ai/Huihui-Qwen3.8-27B-abliterated"
-REVISION="739e3c5b89849f6c238ce1e5b70008612ae42cdd"
+MODEL_ID=PROFILE["repo"]
+REVISION=PROFILE["revision"]
 assert torch.cuda.is_available() and "A100" in torch.cuda.get_device_name(0)
 assert torch.cuda.get_device_properties(0).total_memory/2**30 > 70
 config=AutoConfig.from_pretrained(MODEL_ID,revision=REVISION,trust_remote_code=False,token=False)

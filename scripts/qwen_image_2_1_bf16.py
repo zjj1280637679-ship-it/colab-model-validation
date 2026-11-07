@@ -8,11 +8,14 @@ if "p" in globals():
 print("GPU_ALLOCATED_BEFORE_IMAGE_GIB",round(torch.cuda.memory_allocated()/2**30,3))
 assert torch.cuda.is_available() and torch.cuda.get_device_properties(0).total_memory/2**30 > 70, "STOP: A100 80GB required before model download."
 DIFFUSERS_COMMIT="84532a058702c74ae5d1dd6ceb05683fc5d5e768"
+assert not any(name == "diffusers" or name.startswith("diffusers.") for name in sys.modules), "STOP: diffusers already imported; restart runtime and rerun from bootstrap to avoid stale modules."
 subprocess.check_call([sys.executable,"-m","pip","install","-q","git+https://github.com/huggingface/diffusers.git@"+DIFFUSERS_COMMIT])
+installed_diffusers = observed_distribution("diffusers")
+assert installed_diffusers and installed_diffusers["source"] and installed_diffusers["source"]["commit"] == DIFFUSERS_COMMIT, "STOP: installed Diffusers source commit does not match expected pin."
 from diffusers import QwenImage21Pipeline
 import diffusers, numpy as np
-MODEL_ID="Qwen/Qwen-Image-2.1"
-REVISION="d26bb61231c349cf6b7896fa83353113880e1ba3"
+MODEL_ID=PROFILE["repo"]
+REVISION=PROFILE["revision"]
 assert torch.cuda.is_available() and "A100" in torch.cuda.get_device_name(0)
 assert torch.cuda.memory_allocated()/2**30 < 2, "STOP: previous model still occupies GPU."
 start=time.monotonic()
@@ -31,7 +34,7 @@ for name,module in pipe.components.items():
         assert set(device_count)=={"cuda:0"}, f"STOP: off-device weights in {name}"
         assert not components[name]["quantized"], f"STOP: quantization in {name}"
 print("IMAGE_COMPONENTS:",json.dumps(components,indent=2))
-image_result={"model":MODEL_ID,"revision":REVISION,"diffusers_version":diffusers.__version__,"diffusers_commit":DIFFUSERS_COMMIT,"gpu":torch.cuda.get_device_name(0),"components":components,"load_seconds":round(time.monotonic()-start,2),"tests":[]}
+image_result={"model":MODEL_ID,"revision":REVISION,"diffusers_version":diffusers.__version__,"diffusers_commit":installed_diffusers["source"]["commit"],"diffusers_expected_commit":DIFFUSERS_COMMIT,"diffusers_source":installed_diffusers["source"],"gpu":torch.cuda.get_device_name(0),"components":components,"load_seconds":round(time.monotonic()-start,2),"tests":[]}
 steps_seen=[]
 def validate_latents(pipeline, step, timestep, callback_kwargs):
     if step%5==0 or step==39:
